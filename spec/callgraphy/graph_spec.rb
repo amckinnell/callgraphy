@@ -5,7 +5,7 @@ module Callgraphy
     let(:graphviz) { GraphViz.new(:G, type: :digraph) }
     let(:registry) { instance_double(Registry, target_class_name: "target_class") }
 
-    subject { Graph.new(graphviz, "output_directory", registry) }
+    subject(:graph) { Graph.new(graphviz, "output_directory", registry) }
 
     it "generates a graph" do
       configure_registry(
@@ -26,7 +26,7 @@ module Callgraphy
       expect(graphviz).to receive(:add_edges).exactly(4).and_call_original
       expect(graphviz).to receive(:output).with(png: "output_directory/target_class.png")
 
-      subject.graph
+      graph.graph
     end
 
     private
