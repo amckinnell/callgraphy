@@ -15,7 +15,7 @@ module Callgraphy
       registry.register_method(:public, :m_2)
 
       expect(registry).to have_attributes(
-        all_public_methods: %w(m_1 m_2),
+        all_public_methods: ["m_1", "m_2"],
         all_private_methods: []
       )
     end
@@ -55,7 +55,7 @@ module Callgraphy
       registry.register_call(:m_1, :m_2)
 
       expect(subject).to have_attributes(
-        all_calls: [%w(m_1 m_2)]
+        all_calls: [["m_1", "m_2"]]
       )
     end
 
