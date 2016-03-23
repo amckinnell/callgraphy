@@ -1,5 +1,5 @@
+require "callgraphy/call_graph"
 require "callgraphy/definition"
-require "callgraphy/graph"
 require "callgraphy/registry"
 require "callgraphy/utils"
 require "callgraphy/version"

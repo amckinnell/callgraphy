@@ -1,11 +1,11 @@
-require "callgraphy/graph"
+require "callgraphy/call_graph"
 
 module Callgraphy
-  RSpec.describe Graph do
+  RSpec.describe CallGraph do
     let(:graphviz) { GraphViz.new(:G, type: :digraph) }
     let(:registry) { instance_double(Registry, target_class_name: "target_class") }
 
-    subject(:graph) { Graph.new(graphviz, "output_directory", registry) }
+    subject(:call_graph) { CallGraph.new(graphviz, "output_directory", registry) }
 
     it "generates a graph" do
       configure_registry(
@@ -17,16 +17,16 @@ module Callgraphy
       )
 
       expect_graphviz_to_add_nodes_for(
-        ["m_1", Graph::PUBLIC_OPTIONS],
-        ["m_2", Graph::PRIVATE_OPTIONS],
-        ["m_3", Graph::PRIVATE_OPTIONS],
-        ["c_1", Graph::CALLERS_OPTIONS.merge(label: "C1")],
-        ["c_2", Graph::DEPENDENCIES_OPTIONS.merge(label: "C2")]
+        ["m_1", CallGraph::PUBLIC_OPTIONS],
+        ["m_2", CallGraph::PRIVATE_OPTIONS],
+        ["m_3", CallGraph::PRIVATE_OPTIONS],
+        ["c_1", CallGraph::CALLERS_OPTIONS.merge(label: "C1")],
+        ["c_2", CallGraph::DEPENDENCIES_OPTIONS.merge(label: "C2")]
       )
       expect(graphviz).to receive(:add_edges).exactly(4).and_call_original
       expect(graphviz).to receive(:output).with(png: "output_directory/target_class.png")
 
-      graph.graph
+      call_graph.graph
     end
 
     private

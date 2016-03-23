@@ -3,7 +3,7 @@ require "ruby-graphviz"
 module Callgraphy
   # Knows how to graph the target class call diagram given the specified registry.
   #
-  class Graph
+  class CallGraph
     PUBLIC_OPTIONS = { style: "filled", fillcolor: "palegreen" }
     PRIVATE_OPTIONS = {}
     CALLERS_OPTIONS = { style: "filled", fillcolor: "lightblue" }

@@ -15,7 +15,7 @@ module Callgraphy
     end
 
     def graph(output_directory: ".")
-      Graph.new(graphviz_instance, output_directory, registry).graph
+      CallGraph.new(graphviz_instance, output_directory, registry).graph
     end
 
     def methods_to_graph(method_scope, calls)

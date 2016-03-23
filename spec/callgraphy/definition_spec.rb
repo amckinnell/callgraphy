@@ -5,7 +5,7 @@ require "callgraphy/definition"
 module Callgraphy
   RSpec.describe Definition do
     describe "#define" do
-      let(:graph) { instance_double(Graph) }
+      let(:call_graph) { instance_double(CallGraph) }
 
       it "works" do
         expect_registry_to_receive(
@@ -29,7 +29,7 @@ module Callgraphy
         end.graph(output_directory: "dir")
       end
 
-      it "configures Graph with default output directory" do
+      it "configures CallGraph with default output directory" do
         expect_registry_to_receive([:register_method, :public, :m_1])
         expect_graphviz_to_have(label: "Target class is ClassToGraph")
         expect_graph_to_have(output_directory: ".")
@@ -60,10 +60,10 @@ module Callgraphy
       end
 
       def expect_graph_to_have(output_directory:)
-        expect(Graph).to receive(:new)
+        expect(CallGraph).to receive(:new)
           .with(instance_of(GraphViz), output_directory, instance_of(Registry))
-          .and_return(graph)
-        expect(graph).to receive(:graph)
+          .and_return(call_graph)
+        expect(call_graph).to receive(:graph)
       end
 
       def expect_registry_to_receive(*expected_registry_calls)
