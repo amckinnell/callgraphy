@@ -1,0 +1,41 @@
+AllCops:
+  TargetRubyVersion: 2.1
+
+  Exclude:
+    - "bin/**/*"
+
+Metrics/LineLength:
+  Max: 120
+
+# I like to use the hash rocket in rake files and the sample.
+Style/HashSyntax:
+  Exclude:
+    - "Rakefile"
+    - "sample/rule_service_graph.rb"
+
+# I like to use a difference alignment for the sample.
+Style/AlignParameters:
+  Exclude:
+    - "sample/rule_service_graph.rb"
+
+# I'll just use double quotes everywhere.
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+# I am not going to optimize by freezing strings.
+Style/MutableConstant:
+  Enabled: false
+
+# I am not going to distinguish between fail and raise.
+Style/SignalException:
+  Enabled: false
+
+# I'm not so fond of %w for word arrays.
+Style/WordArray:
+  Enabled: false
+
+# I'm okay with more complex methods in specs.
+Metrics/AbcSize:
+  Max: 25
+  Include:
+    - "spec/**/*"
