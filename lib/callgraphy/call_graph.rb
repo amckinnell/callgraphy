@@ -1,7 +1,7 @@
 require "ruby-graphviz"
 
 module Callgraphy
-  # Knows how to graph the target class call diagram given the specified registry.
+  # Knows how to graph the target class call graph given the specified registry.
   #
   class CallGraph
     PUBLIC_OPTIONS = { style: "filled", fillcolor: "palegreen" }
@@ -9,10 +9,14 @@ module Callgraphy
     CALLERS_OPTIONS = { style: "filled", fillcolor: "lightblue" }
     DEPENDENCIES_OPTIONS = { style: "filled", fillcolor: "lightcoral" }
 
-    attr_reader :graphviz, :output_directory, :registry
+    attr_reader :registry
 
-    def initialize(graphviz, output_directory, registry)
-      @graphviz = graphviz
+    def self.draw(target, output_directory, registry)
+      new(target, output_directory, registry).graph
+    end
+
+    def initialize(target, output_directory, registry)
+      @target = target
       @output_directory = output_directory
       @registry = registry
 
@@ -60,7 +64,12 @@ module Callgraphy
     end
 
     def graph_filename
-      File.join(output_directory, "#{registry.target_class_name}.png")
+      File.join(@output_directory, "#{@target}.png")
+    end
+
+    def graphviz
+      @graphviz ||= GraphViz.new(:G, type: :digraph, labelloc: "b", label:
+        "Target class is #{Utils.pascal_case(@target)}")
     end
   end
 end
