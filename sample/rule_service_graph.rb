@@ -1,6 +1,6 @@
 require "callgraphy"
 
-Callgraphy::Definition.define "rule_service" do
+Callgraphy.draw target: "rule_service" do
   methods_to_graph :public,
     :generate_lot_code => [:generate_lot_code_fragments, :reference_value_for],
     :interpret_mfg_date_from_lot => [:earliest_date, :interpret_from]
@@ -17,4 +17,4 @@ Callgraphy::Definition.define "rule_service" do
 
   constants_to_graph :dependencies,
     :earliest_date => [:earliest_date_interpreter]
-end.graph
+end
