@@ -22,7 +22,7 @@ Or install it yourself as:
 
     require "callgraphy"
 
-    Callgraphy::Definition.define "rule_service" do
+    Callgraphy.draw target: "rule_service" do
       methods_to_graph :public,
         :generate_lot_code => [:generate_lot_code_fragments, :reference_value_for],
         :interpret_mfg_date_from_lot => [:earliest_date, :interpret_from]
@@ -39,7 +39,7 @@ Or install it yourself as:
 
       constants_to_graph :dependencies,
         :earliest_date => [:earliest_date_interpreter]
-    end.graph
+    end
 
 ![RuleService Call Graph](https://github.com/amckinnell/callgraphy/blob/master/sample/rule_service.png)
 
@@ -62,4 +62,3 @@ expected to adhere to the [Contributor Covenant](http://contributor-covenant.org
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
