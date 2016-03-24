@@ -5,7 +5,7 @@ module Callgraphy
     attr_reader :registry
 
     def self.register(&block)
-      definition = Definition.new(Registry.new(""))
+      definition = Definition.new(Registry.new)
       definition.instance_eval(&block)
       definition.registry
     end

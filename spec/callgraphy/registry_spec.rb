@@ -2,13 +2,7 @@ require "callgraphy/registry"
 
 module Callgraphy
   RSpec.describe Registry do
-    subject(:registry) { Registry.new("target_class") }
-
-    it "registers the target class name" do
-      expect(registry).to have_attributes(
-        target_class_name: "target_class"
-      )
-    end
+    subject(:registry) { Registry.new }
 
     it "registers public methods" do
       registry.register_method(:public, :m_1)

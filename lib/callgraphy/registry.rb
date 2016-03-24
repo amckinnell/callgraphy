@@ -1,11 +1,8 @@
 module Callgraphy
-  # Records the information specified by the Callgraphy.define method.
+  # Records the information that describes a call graph.
   #
   class Registry
-    attr_reader :target_class_name
-
-    def initialize(target_class_name)
-      @target_class_name = target_class_name
+    def initialize
       @registry = { public: [], private: [], callers: [], dependencies: [], calls: [] }
     end
 
