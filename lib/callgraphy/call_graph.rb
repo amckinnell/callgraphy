@@ -4,10 +4,12 @@ module Callgraphy
   # Knows how to graph the target class call graph given the specified registry.
   #
   class CallGraph
-    PUBLIC_OPTIONS = { style: "filled", fillcolor: "palegreen" }
-    PRIVATE_OPTIONS = {}
-    CALLERS_OPTIONS = { style: "filled", fillcolor: "lightblue" }
-    DEPENDENCIES_OPTIONS = { style: "filled", fillcolor: "lightcoral" }
+    NODE_OPTIONS = {
+      public: { style: "filled", fillcolor: "palegreen" },
+      private: {},
+      callers: { style: "filled", fillcolor: "lightblue" },
+      dependencies: { style: "filled", fillcolor: "lightcoral" }
+    }
 
     attr_reader :registry
 
@@ -34,13 +36,13 @@ module Callgraphy
     private
 
     def add_methods
-      registry.all_public_methods.each { |name| add_node(name, PUBLIC_OPTIONS) }
-      registry.all_private_methods.each { |name| add_node(name, PRIVATE_OPTIONS) }
+      registry.all_public_methods.each { |name| add_node(name, NODE_OPTIONS[:public]) }
+      registry.all_private_methods.each { |name| add_node(name, NODE_OPTIONS[:private]) }
     end
 
     def add_constants
-      registry.all_callers.each { |name| add_node(name, add_constant_label(name, CALLERS_OPTIONS)) }
-      registry.all_dependencies.each { |name| add_node(name, add_constant_label(name, DEPENDENCIES_OPTIONS)) }
+      registry.all_callers.each { |name| add_node(name, add_constant_label(name, NODE_OPTIONS[:callers])) }
+      registry.all_dependencies.each { |name| add_node(name, add_constant_label(name, NODE_OPTIONS[:dependencies])) }
     end
 
     def add_node(node_name, node_opts)

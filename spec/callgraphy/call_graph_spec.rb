@@ -16,11 +16,11 @@ module Callgraphy
       expect(GraphViz).to receive(:new).with(:G, type: :digraph, labelloc: "b", label: "Target class is Target")
         .and_call_original
       expect_graphviz_to_add_nodes_for(
-        ["m_1", CallGraph::PUBLIC_OPTIONS],
-        ["m_2", CallGraph::PRIVATE_OPTIONS],
-        ["m_3", CallGraph::PRIVATE_OPTIONS],
-        ["c_1", CallGraph::CALLERS_OPTIONS.merge(label: "C1")],
-        ["c_2", CallGraph::DEPENDENCIES_OPTIONS.merge(label: "C2")]
+        ["m_1", CallGraph::NODE_OPTIONS[:public]],
+        ["m_2", CallGraph::NODE_OPTIONS[:private]],
+        ["m_3", CallGraph::NODE_OPTIONS[:private]],
+        ["c_1", CallGraph::NODE_OPTIONS[:callers].merge(label: "C1")],
+        ["c_2", CallGraph::NODE_OPTIONS[:dependencies].merge(label: "C2")]
       )
       expect_any_instance_of(GraphViz).to receive(:add_edges).exactly(4).and_call_original
       expect_any_instance_of(GraphViz).to receive(:output).with(png: "output_directory/target.png")
