@@ -1,21 +1,17 @@
 module Callgraphy
-  # Exposes a DSL to generate call graphs for a target class.
+  # Exposes a DSL to describe call graphs for a target class.
   #
   class Definition
     attr_reader :registry
 
-    def self.define(target_class_name, &block)
-      Definition.new(Registry.new(target_class_name)).tap do |definition|
-        definition.instance_eval(&block)
-      end
+    def self.register(&block)
+      definition = Definition.new(Registry.new(""))
+      definition.instance_eval(&block)
+      definition.registry
     end
 
     def initialize(registry)
       @registry = registry
-    end
-
-    def graph(output_directory: ".")
-      CallGraph.new(graphviz_instance, output_directory, registry).graph
     end
 
     def methods_to_graph(method_scope, calls)
@@ -29,11 +25,6 @@ module Callgraphy
     end
 
     private
-
-    def graphviz_instance
-      GraphViz.new(:G, type: :digraph, labelloc: "b", label:
-        "Target class is #{Utils.pascal_case(registry.target_class_name)}")
-    end
 
     def register_methods_to_graph(method_scope, calls)
       register_calls(calls) do |caller, _callees|
