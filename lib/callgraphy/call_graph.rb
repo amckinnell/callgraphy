@@ -36,21 +36,25 @@ module Callgraphy
     private
 
     def add_methods
-      registry.all_public_methods.each { |name| add_node(name, NODE_OPTIONS[:public]) }
-      registry.all_private_methods.each { |name| add_node(name, NODE_OPTIONS[:private]) }
+      registry.all_public_methods.each { |name| add_method(name, :public) }
+      registry.all_private_methods.each { |name| add_method(name, :private) }
     end
 
     def add_constants
-      registry.all_callers.each { |name| add_node(name, add_constant_label(name, NODE_OPTIONS[:callers])) }
-      registry.all_dependencies.each { |name| add_node(name, add_constant_label(name, NODE_OPTIONS[:dependencies])) }
+      registry.all_callers.each { |name| add_constant(name, :callers) }
+      registry.all_dependencies.each { |name| add_constant(name, :dependencies) }
     end
 
-    def add_node(node_name, node_opts)
-      @nodes[node_name] = graphviz.add_nodes(node_name, node_opts.dup)
+    def add_method(method_name, node_type)
+      add_node(method_name, NODE_OPTIONS[node_type])
     end
 
-    def add_constant_label(constant_name, node_opts)
-      node_opts.merge(label: Utils.pascal_case(constant_name))
+    def add_constant(constant_name, node_type)
+      add_node(constant_name, NODE_OPTIONS[node_type].merge(label: Utils.pascal_case(constant_name)))
+    end
+
+    def add_node(node_name, options)
+      @nodes[node_name] = graphviz.add_nodes(node_name, options.dup)
     end
 
     def add_calls
