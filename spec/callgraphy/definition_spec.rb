@@ -5,7 +5,7 @@ require "callgraphy/definition"
 module Callgraphy
   RSpec.describe Definition do
     describe "#define" do
-      it "works" do
+      it "saves definition in registry" do
         registry = Definition.register do
           methods_to_graph :public, m_1: [:m_2]
           methods_to_graph :private, m_2: []

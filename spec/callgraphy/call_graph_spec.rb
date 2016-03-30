@@ -4,7 +4,7 @@ module Callgraphy
   RSpec.describe CallGraph do
     let(:registry) { instance_double(Registry) }
 
-    it "generates a graph" do
+    it "draws a graph" do
       configure_registry(
         public_methods: ["m_1"],
         private_methods: ["m_2", "m_3"],
