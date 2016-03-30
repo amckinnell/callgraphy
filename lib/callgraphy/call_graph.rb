@@ -14,7 +14,7 @@ module Callgraphy
     attr_reader :registry
 
     def self.draw(target, output_directory, registry)
-      new(target, output_directory, registry).graph
+      new(target, output_directory, registry).draw
     end
 
     def initialize(target, output_directory, registry)
@@ -25,7 +25,7 @@ module Callgraphy
       @nodes = {}
     end
 
-    def graph
+    def draw
       add_methods
       add_constants
       add_calls
