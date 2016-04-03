@@ -14,12 +14,12 @@ module Callgraphy
       @registry = registry
     end
 
-    def methods_to_graph(method_scope, calls)
+    def methods_to_graph(method_scope, calls = {})
       validate_scope(method_scope, :public, :private)
       register_methods_to_graph(method_scope, calls)
     end
 
-    def constants_to_graph(constant_scope, calls)
+    def constants_to_graph(constant_scope, calls = {})
       validate_scope(constant_scope, :callers, :dependencies)
       register_constants_to_graph(constant_scope, calls)
     end
