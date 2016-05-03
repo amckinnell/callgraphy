@@ -1,6 +1,7 @@
 # Callgraphy
 
 [![Gem Version](https://badge.fury.io/rb/callgraphy.svg)](https://badge.fury.io/rb/callgraphy)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 
 Callgraphy is a simple tool that provides a DSL for creating call tree graphs for a target class.
 
