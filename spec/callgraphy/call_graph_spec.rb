@@ -13,7 +13,8 @@ module Callgraphy
         calls: [["m_1", "m_2"], ["m_2", "m_3"], ["c_1", "m_1"], ["m_3", "c_2"]]
       )
 
-      expect(GraphViz).to receive(:new).with(:G, type: :digraph, labelloc: "b", label: "Target class is Target")
+      expect(GraphViz).to receive(:new)
+        .with(:G, type: :digraph, labelloc: "b", label: "Target class is Target")
         .and_call_original
       expect_graphviz_to_add_nodes_for(
         ["m_1", CallGraph::NODE_OPTIONS[:public]],
