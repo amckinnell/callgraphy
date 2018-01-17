@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.1
+  TargetRubyVersion: 2.3
 
   Exclude:
     - "bin/**/*"
@@ -18,6 +18,10 @@ Style/AlignParameters:
   Exclude:
     - "sample/rule_service_graph.rb"
 
+# I am not going to optimize by freezing strings.
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 # I'll just use double quotes everywhere.
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -28,6 +32,10 @@ Style/MutableConstant:
 
 # I am not going to distinguish between fail and raise.
 Style/SignalException:
+  Enabled: false
+
+# I'm not so fond of %i for symbol arrays.
+Style/SymbolArray:
   Enabled: false
 
 # I'm not so fond of %w for word arrays.
