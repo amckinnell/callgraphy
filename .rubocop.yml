@@ -1,22 +1,37 @@
 AllCops:
-  TargetRubyVersion: 2.3
+  NewCops: enable
+  TargetRubyVersion: 2.7
 
   Exclude:
     - "bin/**/*"
+    - "sample/*"
+
+
+# Soon...
+Gemspec/RequireMFA:
+ Enabled: false
+
+# I'm okay with more complex methods in specs.
+Metrics/AbcSize:
+  Max: 25
+  Include:
+    - "spec/**/*"
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
 
 Metrics/LineLength:
   Max: 120
+
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
 
 # I like to use the hash rocket in rake files and the sample.
 Style/HashSyntax:
   Exclude:
     - "Rakefile"
-    - "sample/rule_service_graph.rb"
-
-# I like to use a difference alignment for the sample.
-Style/AlignParameters:
-  Exclude:
-    - "sample/rule_service_graph.rb"
+    - "sample/*"
 
 # I am not going to optimize by freezing strings.
 Style/FrozenStringLiteralComment:
@@ -41,9 +56,3 @@ Style/SymbolArray:
 # I'm not so fond of %w for word arrays.
 Style/WordArray:
   Enabled: false
-
-# I'm okay with more complex methods in specs.
-Metrics/AbcSize:
-  Max: 25
-  Include:
-    - "spec/**/*"
